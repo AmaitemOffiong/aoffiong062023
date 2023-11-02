@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+
+
+</head>
+<body>
+    <h1>Functions</h1>
+    <button id="btnanon"> Anonymouse Function</button>
+    <button id="btnnamed">Named Function</button>
+    
+    <script>
+        // button variables and values
+        const btnAnon = window.document.querySelector('#btnanon');
+        const btnNamed = window.document.querySelector('#btnnamed');
+
+        //add event to buttons
+        btnAnon.addEventListener('click', function (e) {
+            window.alert('Clicked btnanon');
+        });
+        
+        // Named Function Event
+        btnNamed.addEventListener('dblclick', showAlert);
+        
+        // List of Functions
+        function showAlert()
+        {
+            window.alert('Clicked btnNamed');
+        }
+
+    </script>
+</body>
+</html>

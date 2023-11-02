@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        margin-top: 50px;
+      }
+      h1 {
+        text-align: center;
+      }
+      #canvas {
+        margin: auto;
+        display: block;
+        border: 1px solid silver;
+        background-color: rgb(142, 191, 213);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Canvas Drawing</h1>
+    <canvas id="canvas" width="1000px" height="500px"></canvas>
+
+    <script>
+      // Create variables
+      const canvas = window.document.querySelector('#canvas');
+      const ctx = canvas.getContext('2d');
+ 
+ // Cloud Detials 
+ function drawCloud(x, y, scale) {
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        ctx.arc(x, y, 40 * scale, 0, Math.PI * 2);
+        ctx.arc(x + 40 * scale, y, 55 * scale, 0, Math.PI * 2);
+        ctx.arc(x + 90 * scale, y, 40 * scale, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      // Cloud locations
+      drawCloud(200, 100, 1.5);
+      drawCloud(600, 180, 2);
+      drawCloud(900, 60, 1);
+     
+ //Tail
+ctx.beginPath();
+ctx.lineWidth = 10;
+ctx.arc(360, 270, 25, 0, Math.PI * 2);
+ctx.arc(330, 260, 30, 0, Math.PI * 1);
+ctx.strokeStyle = "#ffcccb";
+ctx.stroke();
+
+// // Pig body
+   ctx.fillStyle = "#ffcccb"; 
+   ctx.strokeStyle = 'white';
+    ctx.lineWidth = 1;
+   ctx.beginPath();
+ ctx.arc(500, 250, 150, 0, Math.PI * 2);
+   ctx.fill();
+   ctx.stroke();
+
+   
+
+// Pig Outter eye
+ctx.beginPath();
+ctx.fillStyle = 'white';
+ctx.arc(450, 200, 30, 0, Math.PI * 2);
+ctx.fill();
+ctx.stroke();
+ctx.closePath();
+
+ctx.beginPath();
+ctx.fillStyle = 'white';
+ctx.arc(550, 200, 30, 0, Math.PI * 2);
+ctx.fill();
+ctx.stroke();
+ctx.closePath();
+
+//lining 
+
+//Inner eye
+ctx.beginPath();
+ctx.fillStyle ='black';
+ctx.arc(550, 200, 14, 0, Math.PI * 2);
+ctx.fill();
+
+//Pig inner eye
+ctx.beginPath();
+ctx.fillStyle ='black';
+ctx.arc(450, 200, 14, 0, Math.PI * 2);
+ctx.fill();
+
+//Snout
+ctx.beginPath();
+ctx.lineWidth = 3;
+ctx.strokeStyle = 'white';
+ctx.arc(500, 290, 50, 0, Math.PI * 2);
+ctx.stroke();
+ctx.closePath();
+
+ctx.fillStyle = 'pink';
+    ctx.strokeStyle = 'pink';
+    ctx.lineWidth = 2;
+
+    // Pig snout
+    ctx.beginPath();
+    ctx.arc(500, 290, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    
+    // Pig snout details (snout lines)
+    ctx.strokeStyle = 'pink';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(500, 500);
+    ctx.lineTo(500, 540);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(480, 520);
+    ctx.lineTo(520, 520);
+
+//Nostril
+ctx.beginPath();
+ctx.fillStyle ='black';
+ctx.arc(480, 289, 8, 0, Math.PI * 2);
+ctx.fill();
+
+//Nostrial 2
+ctx.beginPath();
+ctx.fillStyle ='black';
+ctx.arc(520, 289, 8, 0, Math.PI * 2);
+ctx.fill();
+
+//style hove
+ctx.strokeStyle = 'white'; 
+ctx.lineWidth = 1;
+
+//Hoove 1
+ctx.fillStyle = 'pink';
+ctx.beginPath();
+ctx.arc(430, 410, 50, 0, Math.PI, true);
+ctx.fill();
+ctx.stroke();
+
+//Hoove 2
+ctx.fillStyle = 'pink';
+ctx.beginPath();
+ctx.arc(560, 410, 50, 0, Math.PI, true);
+ctx.fill();
+ctx.stroke();
+
+//Ears
+
+
+// Left ear
+ctx.fillStyle = '#ffcccb';
+ctx.beginPath();
+ctx.arc(550, 130, 35, 0, Math.PI, true);
+ctx.fill();
+ctx.stroke();
+ctx.closePath();
+
+// Right ear
+ctx.beginPath();
+ctx.arc(450, 130, 35, 0, Math.PI, true);
+ctx.fill();
+ctx.stroke();
+ctx.closePath();
+
+//Pig ear fill in
+ctx.fillStyle ='PINK';
+ctx.beginPath();
+ctx.arc(550, 130, 20, 0, Math.PI, true);
+ctx.fill();
+
+
+ctx.fillStyle ='PINK';
+ctx.beginPath();
+ctx.arc(450, 130, 20, 0, Math.PI, true);
+ctx.fill();
+
+
+//Grass
+ctx.fillStyle = '#92AE58';
+ctx.fillRect(0,411, 1000, 100);
+
+
+
+
+       
+
+
+    </script>
+  </body>
+</html>
