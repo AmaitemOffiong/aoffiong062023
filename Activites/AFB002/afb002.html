@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFB002</title>
+    <style>
+        h3{
+            text-align: center;
+    
+        }
+        .description{
+                text-align: center;
+            }
+            .parent
+            {
+                width: 50%;
+                min-height: 300px;
+                background-color: royalblue;
+                margin: auto;
+                margin-top: 20px;
+                border: 2px solid black;
+            }
+            .child{
+                width: 80px;
+                height: 80px;
+                background-color: aquamarine;
+                border: 1px solid black;
+                background-size: contain;
+                background-image: url(Images/frog.png);
+            }
+            .description
+            {
+                text-align: center;
+            }
+
+            #parent001{
+                display: flex;
+                 flex-direction: row; 
+                 flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                align-content:space-between;
+            }
+
+
+            #parent002{
+                display: flex;
+                flex-direction: row; 
+                flex-wrap:wrap-reverse;
+                justify-content: space-between;
+                align-items: center;
+                align-items: space-around;
+            }
+
+
+            #parent003{
+               height: 300px;
+                display: flex;
+                flex-direction: column; 
+                flex-wrap:wrap;
+                justify-content: center;
+                align-items: center;
+                align-content: space-between;
+            }
+
+            #parent004{
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+               flex-wrap: wrap-reverse; 
+               justify-content:center;
+                align-items:center; 
+                align-content:space-between;
+            }
+
+           
+
+    </style>
+</head>
+<body>
+    <h1> AFB002</h1>
+    <h2>FlexBox</h2>
+    <div class="description">row, wrap,center, center, space-between </div>
+        <!-- div#parent$$$.parent*4 -->
+
+    <div id="parent001" class="parent">
+        <div class="child">child001</div>
+        <div class="child">child002</div>
+        <div class="child">child003</div>
+        <div class="child">child004</div>
+        <div class="child">child005</div>
+        <div class="child">child006</div>
+
+
+        <!-- div.child{child$$$}*3 -->
+    </div>
+
+    <div class="description">row, wrap-reverse, space-between, center, space-between </div>
+
+    <div id="parent002" class="parent">
+        <div class="child">child001</div>
+        <div class="child">child002</div>
+        <div class="child">child003</div>
+        <div class="child">child004</div>
+        <div class="child">child005</div>
+        <div class="child">child006</div>
+
+        <!-- div.child{child$$$}*3 -->
+    </div>
+
+    <div class="description">column, wrap, center, center, space-between</div>
+
+    <div id="parent003" class="parent">
+        <div class="child">child001</div>
+        <div class="child">child002</div>
+        <div class="child">child003</div>
+        <div class="child">child004</div>
+        <div class="child">child005</div>
+        <div class="child">child006</div>
+
+
+        <!-- div.child{child$$$}*3 -->
+
+    </div>
+
+    <div class="description">row, wrap, center, center, space-between</div>
+
+    <div id="parent004" class="parent">
+        <div class="child">child001</div>
+        <div class="child">child002</div>
+        <div class="child">child003</div>
+        <div class="child">child004</div>
+        <div class="child">child005</div>
+        <div class="child">child006</div>
+
+        <!-- div.child{child$$$}*3 -->
+    </div>
+
+
+    <p></p>
+</body>
+</html>

@@ -57,6 +57,8 @@
         let brushColor = 'red';
         let painting = false;
         let brushSize = 15;
+        let undoArray = [];// To capture canvas snapshots (image data) of strokes
+        let undoIndex = -1;// To track undo array index value
 
         //Variables
         
@@ -99,8 +101,11 @@
             }
         });
 
-        canvas.addEventListener('mouseup', function () {
+        canvas.addEventListener('mouseup', function (e) {
             painting = false;
+
+            captureImageData(e);
+
             ctx.beginPath();
         });
 
@@ -121,6 +126,20 @@
         clearButton.addEventListener('click', function () {
             ctx.clearRect(0, 0, canvas.width, canvas.height );
         });
+
+        function captureImageData(e)
+        {
+
+            if(e.type == "mouseup")
+            {
+
+            }
+
+            undoArray.push(  ctx.getImageData (0, 0, canvas.width, canvas.height) );
+            undoIndex = undoIndex +1; //undoIndex++;
+            console.log(undoIndex);
+
+        }
     </script>
 </body>
 </html>

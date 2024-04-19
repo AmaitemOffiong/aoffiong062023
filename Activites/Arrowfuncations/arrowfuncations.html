@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    pre code {
+        display: block;
+        border: 1px solid black;
+        background-color: silver;
+        font-family: 'Courier New', Courier, monospace;
+    }
+</style>
+<title>Arrow Functions</title>
+</head>
+<body>
+    <h1>Arrow Functions</h1>
+    <pre>
+        <code>
+            // Arrow Function Syntax
+            const functionName = () => {}
+            const square3 = (z) => {}
+        </code>
+    </pre>
+
+    <script>
+
+
+
+//////////////////////////////////////////////////////////
+
+        // Regular Function
+
+        adding(3, 7, 5); // Call function
+
+        function adding(a, b, c)
+        {
+            window.alert(a + b + c);
+        } 
+
+        // Arrow function conversion
+        const addingA = (a, b, c) => {   
+            window.alert(a+ b + c);
+        };
+
+        
+        addingA(1, 2, 3); // Call function
+
+
+
+//////////////////////////////////////////////////////////
+
+
+
+        //Arrow Function Multiply 3 numbers
+        const multiply = (a, b, c) => {
+            window.alert( a * b * c);
+        };
+
+        multiply(3, 4, 5); // Call function
+
+        // Arrow Function Div 2 numbers
+        const divide = (a, b) => {
+            window.alert(a / b);
+        };
+
+        divide(10, 2); // Call function
+
+
+//////////////////////////////////////////////////////////
+            //Regular Function Conversion
+            //multiplyR()
+            multiplyR(3, 4, 5); // Call function
+        function multiplyR(a, b, c)
+        {
+            window.alert( a * b * c);
+        }
+        //divideR()
+
+        divideR(10,2);
+        function divideR(a, b)
+        {
+            window.alert(a / b);
+        }
+
+        //////////////////////////////////////////////////////////
+//storthand Arrow Functions
+const addFourNumbers = a => window.alert{a+5};
+{
+    window.alert(a + 5); // One line command
+}
+
+    addNumbers(5); //One arugment
+    </script>
+</body>
+</html>
+

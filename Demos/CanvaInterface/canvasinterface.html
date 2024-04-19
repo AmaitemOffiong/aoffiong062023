@@ -1,163 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Canvas Interface</title>
-<style>
-h1 {
-text-align: center;
-}
-#canvas {
-border: 2px solid black;
-display: block;
-margin: auto;
-}
-#buttonholder {
-width: 300px;
-margin: auto;
-border: 1px solid black;
-display: flex;
-flex-direction: column;
-}
-button {
-margin: 0.5rem;
-padding: 0.5rem;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canvas Interface</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+    #canvas {
+      border: 2px solid black;
+      display: block;
+      margin: auto;
+    }
+    #buttonholder {
+      width: 300px;
+      margin: auto;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-<h1>Canvas Interace</h1>
+  <h1>Canvas Interface</h1>
 
-<canvas id="canvas"></canvas>
-<div id="buttonholder">
-<button id="createline">Create Line</button>
-<button id="createrectangle">Create Rectangle</button>
-<button id="createshape">Create Shape</button>
-<button id="createarc">Create Arc</button>
-<button id="createstar">Create Star</button>
-</div>
+  <canvas id="canvas"></canvas>
+  <div id="buttonholder">
+    <button id="createline">Create Line</button>
+    <button id="createrectangle">Create Rectangle</button>
+    <button id="createshape">Create Shape</button>
+    <button id="createarc">Create Arc</button>
+    <button id="createstar">Create Star</button>
+    <button id="undodraw">Undo Drawing</button>
+  </div>
 
-<script>
-// Create variables
-const canvas = window.document.querySelector("#canvas");
-const ctx = canvas.getContext("2d");
+  <script>
+    // Create variables
+    const canvas = document.querySelector("#canvas");
+    const ctx = canvas.getContext("2d");
 
-// Configure Canvas
-canvas.width = 400;
-canvas.height = 400;
+    // Configure Canvas
+    canvas.width = 400;
+    canvas.height = 400;
 
-// Style canvas
-canvas.style.backgroundColor = "lightblue";
+    // Style canvas
+    canvas.style.backgroundColor = "lightblue";
 
-// Create variable for buttons
-const btnCreateLine = window.document.querySelector("#createline");
-const btnCreateRectangle =
-window.document.querySelector("#createrectangle");
-const btnCreateShape = window.document.querySelector("#createshape");
-const btnCreateArc = window.document.querySelector("#createarc");
-const btnCreateStar = window.document.querySelector("#createstar");
+    // Undo variables
+    let undoArray = [];
+    let undoIndex = -1; // Capture position in the array. First position is zero.
 
-// Add event listeners
-btnCreateLine.addEventListener("click", function () {
-//window.alert("btnCreateLine");
+    // Create variables for buttons
+    const btnCreateLine = document.querySelector("#createline");
+    const btnCreateRectangle = document.querySelector("#createrectangle");
+    const btnCreateShape = document.querySelector("#createshape");
+    const btnCreateArc = document.querySelector("#createarc");
+    const btnCreateStar = document.querySelector("#createstar");
+    const btnUndo = document.querySelector("#undodraw");
 
- // define line variable
- ctx.strokeStyle = 'black';
- ctx.lineWidth = 15;
- ctx.lineCap = "round";
- ctx.lineJoin = "round";
+    // Add event listeners
+    btnCreateLine.addEventListener("click", function () {
+      // Define line variables
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 15;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
 
- // Draw the line
- ctx.beginPath();
- ctx.moveTo(200, 15);
- ctx.lineTo(200, 250);
- ctx.lineTo(350, 250);
- ctx.stroke();
+      // Draw the line
+      ctx.beginPath();
+      ctx.moveTo(200, 15);
+      ctx.lineTo(200, 250);
+      ctx.lineTo(350, 250);
 
-});
-btnCreateRectangle.addEventListener("click", function () {
-//window.alert("btnCreateRectangle");
-//ctx.strokeStyle = 'white';
-ctx.lineWidth = 10;
-ctx.fillStyle = 'red';
-ctx.fillRect(0, 0, 200, 200);
-//ctx.strokeRect(10, 30, 300, 100);
+      ctx.stroke();
 
-});
-btnCreateShape.addEventListener("click", function () {
-//window.alert("btnCreateShape");
-ctx.strokeStyle = 'blue';
-ctx.fillStyle = 'purple';
-ctx.lineWidth = 15;
-ctx.lineCap = "sqaure";
-ctx.lineJoin = "bevel";
+      //window.alert("Capture image data!");
 
-ctx.beginPath();
-ctx.moveTo(200, 200);
-ctx.lineTo(10, 200);
-ctx.lineTo(200, 10);
-ctx.lineTo(390, 200);
-ctx.closePath();
-ctx.fill();
-ctx.stroke();
+      captureDrawing();
+    });
 
+    btnCreateRectangle.addEventListener("click", function () {
+      ctx.lineWidth = 10;
+      ctx.fillStyle = 'red';
+      ctx.fillRect(0, 0, 200, 200);
 
+      captureDrawing();
+    });
 
-});
-btnCreateArc.addEventListener("click", function () {
-//window.alert("btnCreateArc");
+    btnCreateShape.addEventListener("click", function () {
+      ctx.strokeStyle = 'blue';
+      ctx.fillStyle = 'purple';
+      ctx.lineWidth = 15;
+      ctx.lineCap = "square";
+      ctx.lineJoin = "bevel";
 
-//covert drawing degree
-let desiredDegree = 360;
-let convertedRadian = (Math.PI/180) * desiredDegree;
+      ctx.beginPath();
+      ctx.moveTo(200, 200);
+      ctx.lineTo(10, 200);
+      ctx.lineTo(200, 10);
+      ctx.lineTo(390, 200);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    });
 
+    btnCreateArc.addEventListener("click", function () {
+      // Convert drawing degree
+      let desiredDegree = 360;
+      let convertedRadian = (Math.PI / 180) * desiredDegree;
 
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.fillStyle = "red";
+      ctx.lineWidth = 10;
+      ctx.arc(200, 200, 50, convertedRadian, false);
+      ctx.fill();
+      ctx.stroke();
+    });
 
-ctx.beginPath();
-ctx.strokeStyle = "black";
-ctx.fillStyle = "red";
-ctx.lineWidth = 10;
-//ctx.arc(200, 200, 50, Math.PI *2, flase);
-ctx.arc(200, 200, 50, convertedRadian, false);
-ctx.fill();
-ctx.stroke();
-closePath();
+    btnCreateStar.addEventListener("click", function () {
+      const cx = 300;
+      const cy = 200;
+      const outerRadius = 50;
+      const innerRadius = 25;
+      const numPoints = 5;
 
+      ctx.fillStyle = 'yellow';
+      ctx.strokeStyle = 'yellow';
+      ctx.lineWidth = 15;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
 
-});
+      ctx.beginPath();
+      for (let i = 0; i < numPoints * 2; i++) {
+        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+        const angle = (Math.PI / numPoints) * i;
+        const x = cx + radius * Math.cos(angle);
+        const y = cy + radius * Math.sin(angle);
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    });
 
-btnCreateStar.addEventListener("click", function () {
-   
-     const cx = 300;
-     const cy = 200;
-     const outerRadius = 50;
-     const innerRadius = 25;
-     const numPoints = 5;
+    btnUndo.addEventListener("click", function () {
+      if (undoIndex <= 0) {
+        clearCanvas();
+      } else {
+        replaceDrawing();
+      }
+    });
 
-     ctx.fillStyle = 'yellow';
-     ctx.strokeStyle = 'yellow';
-     ctx.lineWidth = 15;
-     ctx.lineCap = "round";
-     ctx.lineJoin = "round";
+    function captureDrawing() {
+      undoArray.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+      undoIndex++;
+    }
 
-     ctx.beginPath();
-     for (let i = 0; i < numPoints * 2; i++) {
-       const radius = i % 2 === 0 ? outerRadius : innerRadius;
-       const angle = (Math.PI / numPoints) * i;
-       const x = cx + radius * Math.cos(angle);
-       const y = cy + radius * Math.sin(angle);
-       ctx.lineTo(x, y);
-     }
-     ctx.closePath();
-     ctx.fill();
-     ctx.stroke();
- 
+    function replaceDrawing() {
+      undoIndex--;
+      undoArray.pop();
+      ctx.putImageData(undoArray[undoIndex], 0, 0);
+    }
 
-
-});
-</script>
+    function clearCanvas() {
+      ctx.fillStyle = "lightblue";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      undoArray = [];
+      undoIndex = -1;
+    }
+  </script>
 </body>
 </html>
-
-

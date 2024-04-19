@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Map</title>
+</head>
+<body>
+    <h1>Array Map</h1>
+    <script>
+        //create new map
+
+        let teachers = ["Changoyan", "Rizo", "Voss","Luerco", "Yeager"];
+
+        // value and call of each function
+        let teacherMutterings = teachers.map(mutter);
+
+        console.log(teacherMutterings);
+        function mutter(teacher) {
+            return teacher + " is mean!";
+        }
+
+        // Shortcut
+
+        let teacherGripe = teachers.map(function(teacher) {
+            console.log(teacher + " is not cool!");
+        });
+    </script>
+</body>
+</html>
